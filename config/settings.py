@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'books',
     'django_filters',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -56,8 +57,11 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 5,
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',]
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+           
 
 ROOT_URLCONF = 'config.urls'
 
@@ -141,3 +145,8 @@ MAILERS = {
 }
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Swagger Kitab Stack API',
+    'DESCRIPTION': 'API for managing books, authors, and categories',
+    'VERSION': '1.0.0',
+}
