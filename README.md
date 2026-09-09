@@ -79,9 +79,7 @@ python manage.py createsuperuser
 7. Run the development server
 bash
 python manage.py runserver
-
 The API will be available at http://127.0.0.1:8000/.
-
 8. Run tests
 bash
 python manage.py test books
@@ -151,5 +149,4 @@ Roadmap
  Docker + Docker Compose setup
  React frontend
 License
-
 This project was developed for internship/educational purposes.
