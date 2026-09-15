@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'books',
     'django_filters',
     'drf_spectacular',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -150,3 +152,6 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'API for managing books, authors, and categories',
     'VERSION': '1.0.0',
 }
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
