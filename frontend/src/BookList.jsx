@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "./api";
+import { Link } from 'react-router-dom'
 
 function BookList() {
   const [books, setBooks] = useState([]);
@@ -19,9 +20,9 @@ function BookList() {
     <div className="book-list">
       <h2>Books</h2>
       {books.map((book) => (
-        <div key={book.id} className="book-card">
+        <Link key={book.id} to={`/books/${book.id}`} className="book-card">
           <h3>{book.title}</h3>
-        </div>
+        </Link>
       ))}
     </div>
   );

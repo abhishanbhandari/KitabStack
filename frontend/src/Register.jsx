@@ -14,6 +14,7 @@ function Register () {
           setSuccess("Account created! You can now log in.");
           setError("");
         } catch (err) {
+          console.log(err.response.data);
           setError("Registration failed. Try a different username.");
           setSuccess("");
         }

@@ -91,3 +91,24 @@ form p {
 .nav-links a:hover {
   color: #ffffff;
 }
+
+.navbar .logo {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+form input[type="checkbox"] {
+  width: auto;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  margin-right: 6px;
+}
+
+.category-picker label {
+  display: block;
+  color: #ffffff;
+  font-weight: normal;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
