@@ -12,5 +12,50 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-export default api;
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
 
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      const refreshToken = localStorage.getItem("refresh");
+      if (refreshToken) {
+        try {
+          const response = await axios.post(
+            "http://localhost:8000/api/token/refresh/",
+            {
+              refresh: refreshToken,
+            },
+          );
+          localStorage.setItem("access", response.data.access);
+          originalRequest.headers.Authorization = `Bearer ${response.data.access}`;
+          return api(originalRequest);
+        } catch (refreshError) {
+          localStorage.removeItem("access");
+          localStorage.removeItem("refresh");
+        }
+      }
+    }
+
+    return Promise.reject(error);
+  },
+);
+
+export async function getAllPages(endpoint) {
+  let results = [];
+  let url = endpoint;
+
+  while (url) {
+    const response = await api.get(url);
+    results = results.concat(response.data.results);
+    url = response.data.next
+      ? response.data.next.replace("http://localhost:8000/api", "")
+      : null;
+  }
+
+  return results;
+}
+
+export default api;

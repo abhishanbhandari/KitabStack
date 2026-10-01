@@ -13,8 +13,7 @@ function Register () {
           await api.post("/register/", { username, password });
           setSuccess("Account created! You can now log in.");
           setError("");
-        } catch (err) {
-          console.log(err.response.data);
+        } catch {
           setError("Registration failed. Try a different username.");
           setSuccess("");
         }

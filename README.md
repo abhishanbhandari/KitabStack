@@ -20,8 +20,8 @@ Database: PostgreSQL
 Authentication: JWT (via djangorestframework-simplejwt)
 Documentation: drf-spectacular (Swagger/OpenAPI)
 Other libraries: django-filter (search/filtering), Pillow (image handling), python-decouple (environment variables)
-Frontend: React (planned)
-Deployment: Docker (planned)
+Frontend: React (complete)
+Deployment: Docker Compose
 Project Structure
 book_platform/
 ├── backend/
@@ -32,7 +32,7 @@ book_platform/
 │   ├── manage.py
 │   ├── .env             # Real environment variables (gitignored)
 │   └── .env.example     # Template for required environment variables
-├── frontend/            # React app (not yet implemented)
+├── frontend/            # React app
 ├── .gitignore
 └── README.md
 Setup Instructions
@@ -136,7 +136,12 @@ All three resources (Book, Author, Category) use DRF ModelViewSet for consistenc
 JWT was chosen over DRF's basic token authentication for token expiry and refresh support, aligning with common industry practice.
 Database credentials are kept out of source control via python-decouple and a .env file (excluded via .gitignore).
 API documentation is auto-generated from the codebase using drf-spectacular, so it stays in sync with the actual implementation.
-The project follows a backend//frontend/ structure to support an eventual React frontend and Docker Compose setup.
+The project follows a backend/frontend structure with a React frontend and Docker Compose setup.
+Frontend pages
+- Login and registration
+- Book list with search and author/category filters
+- Book detail, add, edit, and delete
+- Profile and logout
 Roadmap
  Book, Author, Category models and CRUD
  Search, filtering, and pagination
@@ -146,7 +151,5 @@ Roadmap
  Automated tests
  Interactive API documentation (Swagger)
  Restructure into backend//frontend/ folders
- Docker + Docker Compose setup
- React frontend
 License
 This project was developed for internship/educational purposes.

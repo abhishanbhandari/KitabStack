@@ -3,9 +3,25 @@ from .models import Book, Author, Category
 from django.contrib.auth.models import User
 
 class BookSerializer(serializers.ModelSerializer):
+    author_name = serializers.CharField(source='author.name', read_only=True)
+    category_names = serializers.SerializerMethodField()
+
     class Meta:
         model = Book
-        fields = ['id', 'title', 'author', 'categories', 'created_at', 'cover_image', 'pdf_file']
+        fields = [
+            'id',
+            'title',
+            'author',
+            'categories',
+            'author_name',
+            'category_names',
+            'created_at',
+            'cover_image',
+            'pdf_file',
+        ]
+
+    def get_category_names(self, obj):
+        return [category.name for category in obj.categories.all()]
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:

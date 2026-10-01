@@ -1,11 +1,11 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import viewsets, generics
 from .models import Book, Author, Category
 from .serializers import BookSerializer, AuthorSerializer, CategorySerializer, RegisterSerializer
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny, IsAuthenticated
 from django.contrib.auth.models import User
 
 
@@ -22,6 +22,15 @@ class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
     permission_classes = [AllowAny]
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def profile(request):
+    return Response({
+        'username': request.user.username,
+        'email': request.user.email,
+    })
 
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
