@@ -12,6 +12,7 @@ function Login() {
     e.preventDefault();
     try {
       const response = await api.post("/token/", { username, password });
+      localStorage.setItem("access", response.data.access);
       localStorage.setItem("refresh", response.data.refresh);
       navigate("/books", { replace: true });
     } catch (err) {
